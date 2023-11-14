@@ -98,6 +98,7 @@ class HtmlConstants:
             --navigation-height: 70px;
             --navigation-border: 2px;
             --sidebar-width: 250px;
+            --content-vertical-padding: 10px;
         }
 
         body {
@@ -163,11 +164,18 @@ class HtmlConstants:
 
         #content {
             margin-left: var(--sidebar-width);
-            padding: 10px 40px 10px 40px;
+            padding: var(--content-vertical-padding) 40px var(--content-vertical-padding) 40px;
+            height: calc(100vh - var(--navigation-height) - var(--navigation-border) - var(--content-vertical-padding) * 2);
+            overflow-y: scroll;
         }
 
         h1, h2, h3, h4, h5, h6, p {
             margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 7px;
         }
 
         blockquote {
@@ -197,9 +205,6 @@ class HtmlConstants:
             hljs.highlightAll();
             const sections = ["""
     SECTIONS_LISTING_TO_CUSTOM_CSS = """];
-            if (sections.length < 2) {
-                document.getElementById("navigation").style.display = "none";
-            }
             function showSection(selected) {
                 for (const section of sections) {
                     for (const e of document.getElementsByClassName(section)) {
@@ -235,6 +240,7 @@ class HtmlConstants:
     <div id="content">
 """
     CONTENT_TO_CUSTOM_JS = """
+        <div style="height: 50px;"></div>
     </div>
 """
     CUSTOM_JS_TO_END = """</body>
